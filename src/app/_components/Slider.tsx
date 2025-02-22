@@ -4,7 +4,6 @@ import React from 'react'
 import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
-import { ArrowRight } from 'lucide-react'
 
 const Slider = () => {
     return (
@@ -23,10 +22,9 @@ const Slider = () => {
                     <div className="relative w-full h-full">
                         <div className='absolute left-8 top-2/4 lg:top-[50%] -translate-y-2/4 z-[1]'>
                             <span className='text-zinc-300 text-[1.2rem] lg:text-[2rem] leading-none'>#OfertaEcommerce</span>
-                            <h1 className='text-[2rem] lg:text-[6rem] font-bold leading-[1.3] lg:leading-[1.1] mb-[.4rem] lg:mb-[1rem]'>Oferta por tempo limitado! <br /> Descontos de até 50%</h1>
-                            <button className='dark:bg-zinc-100 dark:text-zinc-900 p-[.8rem] text-[1rem] lg:text-[1.6rem] font-medium rounded-[.6rem] flex items-center gap-[.6rem]'>
+                            <h1 className='text-[2rem] lg:text-[6rem] font-bold leading-[1.3] lg:leading-[1.1] mb-[.4rem] lg:mb-[1rem]'>Descontos de até 30% <br /> em camisas</h1>
+                            <button className='dark:bg-zinc-100 dark:text-zinc-900 p-[.8rem] text-[1.2rem] lg:text-[1.6rem] font-medium rounded-[.6rem] flex items-center gap-[.6rem]'>
                                 Aproveitar oferta
-                                <ArrowRight className='size-[1.8rem]'/>
                             </button>
                         </div>
                         <Image
@@ -45,8 +43,10 @@ const Slider = () => {
                     <div className="relative w-full h-full">
                         <div className='absolute left-8 top-2/4 lg:top-[50%] -translate-y-2/4 z-[1]'>
                             <span className='text-zinc-300 text-[1.2rem] lg:text-[2rem] leading-none'>#OfertaEcommerce</span>
-                            <h1 className='text-[2rem] lg:text-[6rem] font-bold leading-[1.3] lg:leading-[1.1] mb-[.4rem] lg:mb-[1rem]'>Oferta por tempo limitado! <br /> Descontos de até 50%</h1>
-                            <button className='dark:bg-zinc-100 dark:text-zinc-900 p-[.8rem] text-[1rem] lg:text-[1.6rem] font-medium rounded-[.6rem]'>Aproveitar oferta</button>
+                            <h1 className='text-[2rem] lg:text-[6rem] font-bold leading-[1.3] lg:leading-[1.1] mb-[.4rem] lg:mb-[1rem]'> Descontos de até 20% <br /> em bolsas</h1>
+                            <button className='dark:bg-zinc-100 dark:text-zinc-900 p-[.8rem] text-[1.2rem] lg:text-[1.6rem] font-medium rounded-[.6rem] flex items-center gap-[.6rem]'>
+                                Aproveitar oferta
+                            </button>
                         </div>
                         <Image
                             src={"/banner-2.webp"}
@@ -64,8 +64,10 @@ const Slider = () => {
                     <div className="relative w-full h-full">
                         <div className='absolute left-8 top-2/4 lg:top-[50%] -translate-y-2/4 z-[1]'>
                             <span className='text-zinc-300 text-[1.2rem] lg:text-[2rem] leading-none'>#OfertaEcommerce</span>
-                            <h1 className='text-[2rem] lg:text-[6rem] font-bold leading-[1.3] lg:leading-[1.1] mb-[.4rem] lg:mb-[1rem]'>Oferta por tempo limitado! <br /> Descontos de até 50%</h1>
-                            <button className='dark:bg-zinc-100 dark:text-zinc-900 p-[.8rem] text-[1rem] lg:text-[1.6rem] font-medium rounded-[.6rem]'>Aproveitar oferta</button>
+                            <h1 className='text-[2rem] lg:text-[6rem] font-bold leading-[1.3] lg:leading-[1.1] mb-[.4rem] lg:mb-[1rem]'>Descontos de até 20% <br /> em sapatos</h1>
+                            <button className='dark:bg-zinc-100 dark:text-zinc-900 p-[.8rem] text-[1.2rem] lg:text-[1.6rem] font-medium rounded-[.6rem] flex items-center gap-[.6rem]'>
+                                Aproveitar oferta
+                            </button>
                         </div>
                         <Image
                             src={"/banner-3.webp"}
@@ -82,8 +84,10 @@ const Slider = () => {
                     <div className="relative w-full h-full">
                         <div className='absolute left-8 top-2/4 lg:top-[50%] -translate-y-2/4 z-[1]'>
                             <span className='text-zinc-300 text-[1.2rem] lg:text-[2rem] leading-none'>#OfertaEcommerce</span>
-                            <h1 className='text-[2rem] lg:text-[6rem] font-bold leading-[1.3] lg:leading-[1.1] mb-[.4rem] lg:mb-[1rem]'>Oferta por tempo limitado! <br /> Descontos de até 50%</h1>
-                            <button className='dark:bg-zinc-100 dark:text-zinc-900 p-[.8rem] text-[1rem] lg:text-[1.6rem] font-medium rounded-[.6rem]'>Aproveitar oferta</button>
+                            <h1 className='text-[2rem] lg:text-[6rem] font-bold leading-[1.3] lg:leading-[1.1] mb-[.4rem] lg:mb-[1rem]'>Descontos de até 15% <br /> em calças</h1>
+                            <button className='dark:bg-zinc-100 dark:text-zinc-900 p-[.8rem] text-[1.2rem] lg:text-[1.6rem] font-medium rounded-[.6rem] flex items-center gap-[.6rem]'>
+                                Aproveitar oferta
+                            </button>
                         </div>
                         <Image
                             src={"/banner-4.webp"}
