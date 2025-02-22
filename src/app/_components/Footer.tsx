@@ -1,4 +1,4 @@
-import { Facebook, Instagram, ShoppingBasket, Twitter } from 'lucide-react'
+import { AudioWaveform, Facebook, Instagram, Twitter } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
@@ -8,8 +8,8 @@ const Footer = () => {
             <div className="container-width flex max-lg:gap-[2rem] flex-wrap justify-between pt-[6rem]">
                 <div className='max-md:w-full'>
                     <Link href={"/"} className='text-[3rem] font-semibold font-space flex items-center gap-[1rem] '>
-                        <ShoppingBasket className='size-[2.6rem]' />
-                        Ecommerce
+                        <AudioWaveform className='size-[2.6rem]' />
+                        UrbnX
                     </Link>
                     <ul className='flex items-center gap-[1rem] mt-[4rem]'>
                         <li>
@@ -88,7 +88,7 @@ const Footer = () => {
                 </div>
             </div>
                 <div className='w-full mt-[4rem]  p-[1rem] text-[1.6rem] '>
-                    <p className='font-space max-w-[70%] mx-auto'>&copy; 2024 - 2025. Ecommerce</p>
+                    <p className='font-space max-w-[70%] mx-auto'>&copy; 2024 - 2025. UrbnX</p>
                 </div>
         </footer>
     )
