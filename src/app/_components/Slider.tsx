@@ -33,6 +33,7 @@ const Slider = () => {
                             alt='a'
                             width={1000}
                             height={1000}
+                            fetchPriority='high'
                             className='rounded-[4rem] w-full h-full object-cover'
                         />
 
