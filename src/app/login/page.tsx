@@ -1,7 +1,7 @@
 "use client"
 import Image from 'next/image'
 import React, { FormEvent, useState } from 'react'
-import favIcon from "../favicon.ico"
+import logo from "../icon.svg"
 import { useUser } from '@/store/User'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
@@ -75,7 +75,7 @@ const Login = () => {
                 <ChevronLeft className='size-[1.8rem]' />
                 Voltar</Link>
                 <div className=''>
-                    <Image src={favIcon} alt='file' width={64} height={64} className='mb-[2rem]' />
+                    <Image src={logo} alt='file' width={64} height={64} className='mb-[2rem]' />
                     <h1 className='text-[2.4rem] font-semibold'>Bem vindo(a) de volta.</h1>
                     <form onSubmit={handleSubmit(signIn)} className='w-full lg:w-[80%] mt-[1.2rem] flex flex-col gap-[1.2rem]'>
                         <div className="" >
