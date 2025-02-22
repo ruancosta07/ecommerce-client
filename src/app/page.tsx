@@ -30,7 +30,7 @@ export default async function Home() {
             &quot;Moda que vai muito além do estilo.&quot;
           </h1>
           </div>
-          <Image src={"/banner-4.jpg"} alt="Banner" width={2000} height={2000} className="w-full h-full object-cover" />
+          <Image src={"/banner-4.webp"} alt="Banner" width={2000} height={2000} className="w-full h-full object-cover" />
           <div className="inset-0 absolute left-0 top-0 h-full w-full bg-zinc-900/50"></div>
         </section>
       </main>
