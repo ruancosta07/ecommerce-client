@@ -1,0 +1,104 @@
+"use client"
+import Image from 'next/image'
+import React from 'react'
+import { Autoplay } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import { ArrowRight } from 'lucide-react'
+
+const Slider = () => {
+    return (
+        <section className=''>
+            <Swiper
+                autoplay={{
+                    delay: 5000,
+                    disableOnInteraction: true,
+                }}
+                spaceBetween={10}
+                loop
+                modules={[Autoplay]}
+                className="container-width h-[25vh] lg:h-[50vh]"
+            >
+                <SwiperSlide>
+                    <div className="relative w-full h-full">
+                        <div className='absolute left-8 top-2/4 lg:top-[50%] -translate-y-2/4 z-[1]'>
+                            <span className='text-zinc-300 text-[1.2rem] lg:text-[2rem] leading-none'>#OfertaEcommerce</span>
+                            <h1 className='text-[2rem] lg:text-[6rem] font-bold leading-[1.3] lg:leading-[1.1] mb-[.4rem] lg:mb-[1rem]'>Oferta por tempo limitado! <br /> Descontos de até 50%</h1>
+                            <button className='dark:bg-zinc-100 dark:text-zinc-900 p-[.8rem] text-[1rem] lg:text-[1.6rem] font-medium rounded-[.6rem] flex items-center gap-[.6rem]'>
+                                Aproveitar oferta
+                                <ArrowRight className='size-[1.8rem]'/>
+                            </button>
+                        </div>
+                        <Image
+                            src={"/banner-1.webp"}
+                            priority
+                            alt='a'
+                            width={1000}
+                            height={1000}
+                            className='rounded-[4rem] w-full h-full object-cover'
+                        />
+
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent rounded-[4rem]"></div>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <div className="relative w-full h-full">
+                        <div className='absolute left-8 top-2/4 lg:top-[50%] -translate-y-2/4 z-[1]'>
+                            <span className='text-zinc-300 text-[1.2rem] lg:text-[2rem] leading-none'>#OfertaEcommerce</span>
+                            <h1 className='text-[2rem] lg:text-[6rem] font-bold leading-[1.3] lg:leading-[1.1] mb-[.4rem] lg:mb-[1rem]'>Oferta por tempo limitado! <br /> Descontos de até 50%</h1>
+                            <button className='dark:bg-zinc-100 dark:text-zinc-900 p-[.8rem] text-[1rem] lg:text-[1.6rem] font-medium rounded-[.6rem]'>Aproveitar oferta</button>
+                        </div>
+                        <Image
+                            src={"/banner-2.webp"}
+                            alt='a'
+                            width={1000}
+                            height={1000}
+                            className='rounded-[4rem] w-full h-full object-cover'
+                        />
+
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent rounded-[4rem]"></div>
+                    </div>
+                </SwiperSlide>
+
+                <SwiperSlide>
+                    <div className="relative w-full h-full">
+                        <div className='absolute left-8 top-2/4 lg:top-[50%] -translate-y-2/4 z-[1]'>
+                            <span className='text-zinc-300 text-[1.2rem] lg:text-[2rem] leading-none'>#OfertaEcommerce</span>
+                            <h1 className='text-[2rem] lg:text-[6rem] font-bold leading-[1.3] lg:leading-[1.1] mb-[.4rem] lg:mb-[1rem]'>Oferta por tempo limitado! <br /> Descontos de até 50%</h1>
+                            <button className='dark:bg-zinc-100 dark:text-zinc-900 p-[.8rem] text-[1rem] lg:text-[1.6rem] font-medium rounded-[.6rem]'>Aproveitar oferta</button>
+                        </div>
+                        <Image
+                            src={"/banner-3.webp"}
+                            alt='a'
+                            width={1000}
+                            height={1000}
+                            className='rounded-[4rem] w-full h-full object-cover'
+                        />
+
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent rounded-[4rem]"></div>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <div className="relative w-full h-full">
+                        <div className='absolute left-8 top-2/4 lg:top-[50%] -translate-y-2/4 z-[1]'>
+                            <span className='text-zinc-300 text-[1.2rem] lg:text-[2rem] leading-none'>#OfertaEcommerce</span>
+                            <h1 className='text-[2rem] lg:text-[6rem] font-bold leading-[1.3] lg:leading-[1.1] mb-[.4rem] lg:mb-[1rem]'>Oferta por tempo limitado! <br /> Descontos de até 50%</h1>
+                            <button className='dark:bg-zinc-100 dark:text-zinc-900 p-[.8rem] text-[1rem] lg:text-[1.6rem] font-medium rounded-[.6rem]'>Aproveitar oferta</button>
+                        </div>
+                        <Image
+                            src={"/banner-4.webp"}
+                            alt='a'
+                            width={1000}
+                            height={1000}
+                            className='rounded-[4rem] w-full h-full object-cover'
+                        />
+
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent rounded-[4rem]"></div>
+                    </div>
+                </SwiperSlide>
+            </Swiper>
+        </section>
+    )
+}
+
+export default Slider
