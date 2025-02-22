@@ -18,5 +18,5 @@ export function middleware(request:NextRequest){
 }
 
 export const config:MiddlewareConfig =  {
-    matcher: ["/usuario/carrinho", "/complete", "/categorias"],
+    matcher: ["/usuario/:path*", "/complete", "/categorias"],
 }
