@@ -13,7 +13,7 @@ export const useSlider = () => {
 
 
 
-const Slider = React.forwardRef<React.ElementRef<typeof SliderPrimitive.Root>,React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root> & {max:number; slider:number[]; setSlider:React.Dispatch<React.SetStateAction<number[]>>}>(({ className, max ,slider, setSlider, ...props }, ref) => {
+const Slider = React.forwardRef<React.ElementRef<typeof SliderPrimitive.Root>,React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root> & {max:number | undefined; slider:number[]; setSlider:React.Dispatch<React.SetStateAction<number[]>>}>(({ className, max ,slider, setSlider, ...props }, ref) => {
   return(
   <SliderPrimitive.Root
     ref={ref}
