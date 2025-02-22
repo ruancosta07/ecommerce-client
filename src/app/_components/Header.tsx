@@ -1,6 +1,6 @@
 "use client"
 import { useUser } from '@/store/User'
-import { Heart, HistoryIcon, LogOut, MoonStar, Search, ShoppingBasketIcon, ShoppingCart, SunDim, User } from 'lucide-react'
+import { AudioWaveform, Heart, HistoryIcon, LogOut, MoonStar, Search, ShoppingCart, SunDim, User } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
@@ -76,13 +76,15 @@ const Header = () => {
     }
   }
 
-
   return (
     <header>
+      <div className='bg-zinc-800 flex justify-center dark:text-zinc-100 font-semibold py-[1rem] text-[1.2rem] lg:text-[1.6rem]'>
+        <span className='leading-none'>Ofertas de até 20% com o cupom URBNX20</span>
+      </div>
       <div className="container-width py-[3rem] flex items-center justify-between relative max-md:flex-wrap">
         <Link href={"/"} className='text-zinc-900 dark:text-zinc-100 flex items-center gap-[.6rem] text-[2rem] max-lg:leading-none font-space font-semibold tracking-tight'>
-          <ShoppingBasketIcon className='size-[3rem]' />
-          Ecommerce
+          <AudioWaveform className='size-[3rem]' />
+          UrbnX
         </Link>
         <motion.div className='lg:ml-auto lg:mr-[2rem] relative lg:w-[30%] max-md:order-3 max-md:mt-[1.2rem] max-md:w-full' animate={{ width: !isMobile ? (searchBarFocus ? "50%" : "30%" ): "100%" }} onAnimationComplete={(e: AnimationDefinition & { width: "30%" | "50%" | "100%" }) => {
           if (e.width === "50%") {
@@ -160,14 +162,14 @@ const Header = () => {
             </div>}
         </motion.div>
         <nav className='flex items-center gap-[1rem] max-md:order-2'>
-          {!signed && !isMobile && <>
+          {!signed && !isMobile && <div className='max-lg:hidden flex gap-[1rem]'>
             <Link href={"/login"} className='p-[1rem] rounded-[.6rem] font-semibold bg-zinc-300 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300 text-[1.6rem]'>
               Login
             </Link>
             <Link href={"/criar-conta"} className='p-[1rem] rounded-[.6rem] font-semibold bg-zinc-900 text-zinc-100 dark:bg-zinc-100 dark:text-zinc-900 text-[1.6rem]'>
               Criar conta
             </Link>
-          </>}
+          </div>}
           {!signed && isMobile && <>
             <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
               {theme === "light" ? <SunDim className='size-[2rem]' /> : <MoonStar className='size-[2rem]' />}
@@ -182,7 +184,7 @@ const Header = () => {
                 "top-full": !menuMobileActive,
               })}></div>
             </button>
-            {menuMobileActive && <Popup className='absolute right-0 top-[70%] p-[.8rem] text-[1.4rem] font-medium flex flex-col bg-zinc-100 border-zinc-300 text-zinc-900 dark:bg-zinc-900 border dark:border-zinc-700 dark:text-zinc-100 rounded-[.5rem] z-[3]'>
+            {menuMobileActive && <Popup className='absolute right-0 -bottom-[5%] p-[.8rem] text-[1.4rem] font-medium flex flex-col bg-zinc-100 border-zinc-300 text-zinc-900 dark:bg-zinc-900 border dark:border-zinc-700 dark:text-zinc-100 rounded-[.5rem] z-[3]'>
               <Link href={"/login"} className='p-[.8rem] font-space'>
                 Login
               </Link>
