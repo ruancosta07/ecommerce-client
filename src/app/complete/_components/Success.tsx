@@ -25,7 +25,7 @@ const Success = ({ order }: { order: Order }) => {
               <Image src={p.images[0]} alt={p.name} width={200} height={200} className='size-[7rem] object-cover rounded-[1rem]' />
               <div>
                 <span className='text-[1.6rem] font-semibold'>{p.name}</span>
-                <p className='text-[1.4rem] font-medium'>R$ {p.price}</p>
+                <p className='text-[1.4rem] font-medium'>R$ {p.price.toFixed(2)}</p>
               </div>
             </div>)}
           </div>
