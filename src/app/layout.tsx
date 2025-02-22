@@ -9,8 +9,8 @@ const interFont = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const bricolageGrotesque = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-bricolage-grotesque" })
 
 export const metadata: Metadata = {
-  title: "Ecommerce App",
-  description: "Um ecommerce criado com Next e Node",
+  title: "UrbnX",
+  description: "Descubra a moda urbana que combina atitude e estilo. Peças modernas, autênticas e cheias de personalidade para quem vive a cidade com intensidade. Entre na tendência streetwear agora! 🚀🔥" ,
 };
 
 export default function RootLayout({
