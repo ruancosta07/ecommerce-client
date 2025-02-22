@@ -48,15 +48,14 @@ const Header = () => {
     localStorage.setItem("historyProducts", JSON.stringify(historyProducts))
   }, [historyProducts])
 
-
-
   async function logOut() {
     setSigned(false)
     setUser(null)
     setCart([])
     setFavorites([])
     Cookies.remove("authTokenUser")
-    if (!pathname.startsWith("/") && !pathname.endsWith("/")) {
+    const pathnameSlice = pathname.split("/")
+    if (pathnameSlice.length > 2 && !pathname.includes("produto")) {
       redirect("/login")
     }
   }
