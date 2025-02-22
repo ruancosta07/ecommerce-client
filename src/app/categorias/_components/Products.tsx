@@ -15,7 +15,7 @@ import { Slider, useSlider } from '@/app/_components/ui/slider'
 type OrderProducts = "Padrão" | "Preço decrescente" | "Preço crescente"
 
 const Products = ({ products, total, totalPages, clearProducts }: { products: Product[], total: number; totalPages: number; clearProducts: Product[] }) => {
-    const { favorites, signed, setFavorites, setCart } = useUser()
+    const { favorites, signed, setFavorites, setCart, cart } = useUser()
     const { message, setMessage } = useMessage()
     const [isHover, setIsHover] = useState<string | null>(null)
     const { slider, setSlider, max, setMax } = useSlider()
@@ -184,9 +184,9 @@ const Products = ({ products, total, totalPages, clearProducts }: { products: Pr
                                     const reviews = p.reviews as Reviews[]
                                     const totalRate = +(reviews.reduce((acc, review) => acc + Math.floor(review.rating) / reviews.length, 0)).toFixed(1)
                                     return (
-                                        <Link href={`/produto/${p.id}`} key={p.id} className='' >
+                                        <Link aria-label='Acessar página do produto' href={`/produto/${p.id}`} key={p.id} className='' >
                                             <div className='overflow-hidden relative rounded-[2rem]'>
-                                                <button onClick={(e) => addItemToFavorites(e, p.id)} className='absolute right-2 top-2 z-[2] bg-zinc-300 dark:bg-zinc-800 p-[1rem] rounded-full'>
+                                                <button aria-label={favorites.find((f)=> f.id === p.id) ? "Remover produto dos favoritos" : "Adicionar produto aos favoritos"} onClick={(e) => addItemToFavorites(e, p.id)} className='absolute right-2 top-2 z-[2] bg-zinc-300 dark:bg-zinc-800 p-[1rem] rounded-full'>
                                                     <Heart className={clsx("size-[2.6rem]", {
                                                         "text-rose-500 fill-rose-500": favorites.some((f) => f.id === p.id),
                                                     })} />
@@ -204,7 +204,7 @@ const Products = ({ products, total, totalPages, clearProducts }: { products: Pr
                                             <span className='text-[1.6rem] font-semibold  block'>
                                                 R$ {p.price.toFixed(2)}
                                             </span>
-                                            <button onClick={(e) => addItemToCart(e, p.id)} className='mt-[1.2rem] text-center w-full bg-zinc-900 text-zinc-100 dark:bg-zinc-100 dark:text-zinc-900 text-[1.5rem] p-[1rem] font-medium rounded-[1rem] flex items-center gap-[1rem] justify-center'>
+                                            <button aria-label={cart.find((f)=> f.id === p.id) ? "Remover produto do carrinho" : "Adicionar produto ao carrinho"} onClick={(e) => addItemToCart(e, p.id)} className='mt-[1.2rem] text-center w-full bg-zinc-900 text-zinc-100 dark:bg-zinc-100 dark:text-zinc-900 text-[1.5rem] p-[1rem] font-medium rounded-[1rem] flex items-center gap-[1rem] justify-center'>
                                                 <ShoppingCart className='size-[1.6rem]' />
                                                 Adicionar ao carrinho
                                             </button>
