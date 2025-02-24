@@ -50,7 +50,7 @@ const Login = () => {
     async function signIn() {
         setIsLoading(true)
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_DEV_URL}/auth/login`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_PROD_URL}/auth/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

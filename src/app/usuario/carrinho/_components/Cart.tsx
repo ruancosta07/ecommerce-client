@@ -52,7 +52,7 @@ const Cart = () => {
     async function decreaseItem(id: string) {
         setIsLoading(true)
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_DEV_URL}/users/cart/decrease/${id}`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_PROD_URL}/users/cart/decrease/${id}`, {
                 method: "PATCH",
                 headers: {
                     "Authorization": `Bearer ${Cookies.get("authTokenUser")}`
@@ -115,7 +115,7 @@ const Cart = () => {
     async function removeItem(id: string) {
         setIsLoading(true)
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_DEV_URL}/users/cart/remove/${id}`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_PROD_URL}/users/cart/remove/${id}`, {
                 method: "PATCH",
                 headers: {
                     "Authorization": `Bearer ${Cookies.get("authTokenUser")}`
