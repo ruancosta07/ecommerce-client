@@ -1,5 +1,5 @@
 "use client"
-import Switch, { useSwitch } from '@/app/_components/Switch'
+import { useSwitch } from '@/app/_components/Switch'
 import { useUser } from '@/store/User'
 import React, { useEffect } from 'react'
 import * as SwitchPrimitive from "@radix-ui/react-switch"
