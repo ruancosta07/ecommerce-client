@@ -52,7 +52,7 @@ const Cart = () => {
     async function decreaseItem(id: string) {
         setIsLoading(true)
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_PROD_URL}/users/cart/remove/${id}`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_DEV_URL}/users/cart/decrease/${id}`, {
                 method: "PATCH",
                 headers: {
                     "Authorization": `Bearer ${Cookies.get("authTokenUser")}`
@@ -104,6 +104,38 @@ const Cart = () => {
                 position: "bottom-right",
                 type: "success",
                 // message: "O item foi adicionado com sucesso, cheque seu carrinho para ver a alteração"
+            })
+        } catch (err) {
+            console.log(err)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    async function removeItem(id: string) {
+        setIsLoading(true)
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_DEV_URL}/users/cart/remove/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Authorization": `Bearer ${Cookies.get("authTokenUser")}`
+                }
+            })
+            if (!response.ok) {
+                setMessage({
+                    title: "Erro ao remover item do carrinho",
+                    position: "bottom-right",
+                    type: "error",
+                    message: "Caso o erro persista, entre em contato com nosso suporte"
+                })
+            }
+            const data = await response.json()
+            setCart(data)
+            setMessage({
+                title: "Item removido com sucesso",
+                position: "bottom-right",
+                type: "success",
+                // message: "O item foi removido com sucesso, cheque seu carrinho para ver a alteração"
             })
         } catch (err) {
             console.log(err)
@@ -177,16 +209,16 @@ const Cart = () => {
                             <h1 className='text-[1.6rem] lg:text-[2.4rem] font-semibold break-all text-wrap break-words'>{c.name}</h1>
                             <span className='text-[1.8rem] font-medium dark:text-zinc-300'>R$ {c.price.toFixed(2)}</span>
                             <div className=' flex items-center gap-[.8rem]'>
-                                <button disabled={isLoading} className='disabled:opacity-70 disabled:cursor-not-allowed' onClick={() => decreaseItem(c.id)}>
+                                <button aria-label='Diminuir a quantidade do item' disabled={isLoading} className='disabled:opacity-70 disabled:cursor-not-allowed' onClick={() => decreaseItem(c.id)}>
                                     <MinusCircle className='size-[2rem]' />
                                 </button>
                                 <span className='text-[2rem]'>{c.quantity}</span>
-                                <button disabled={isLoading} className='disabled:opacity-70 disabled:cursor-not-allowed' onClick={() => increaseItem(c.id)}>
+                                <button aria-label='Aumentar a quantidade do item' disabled={isLoading} className='disabled:opacity-70 disabled:cursor-not-allowed' onClick={() => increaseItem(c.id)}>
                                     <PlusCircle className='size-[2rem]' />
                                 </button>
                             </div>
                         </div>
-                        <button className='mb-auto ml-auto text-red-400'>
+                        <button aria-label='Remover item do carrinho' onClick={()=> removeItem(c.id)} className='mb-auto ml-auto text-red-400'>
                             <Trash2 />
                         </button>
                     </div>)}
@@ -209,12 +241,12 @@ const Cart = () => {
                     </div>
                     <hr className='dark:border-zinc-700 my-[1rem]'/>
                     <div className='flex items-center gap-[1rem]'>
-                        <input value={coupon} onChange={({target: {value}})=> setCoupon(value)} type="text" className='w-[70%] dark:bg-zinc-800/70 focus:bg-zinc-800 border border-transparent focus:dark:border-zinc-700 p-[1rem] text-[1.4rem] rounded-[.6rem] leading-none duration-200' />
-                        <button onClick={()=> verifyCoupon(coupon)} className='w-[30%] text-[1.4rem] bg-zinc-100 text-zinc-900 h-full p-[1rem] rounded-[.6rem] font-semibold'>
+                        <input placeholder='Insira um cupom' value={coupon} onChange={({target: {value}})=> setCoupon(value)} type="text" className='w-[70%] dark:bg-zinc-800/70 focus:bg-zinc-800 border border-transparent focus:dark:border-zinc-700 p-[1rem] text-[1.4rem] rounded-[.6rem] leading-none duration-200' />
+                        <button aria-label='Aplicar cupom' onClick={()=> verifyCoupon(coupon)} className='w-[30%] text-[1.4rem] bg-zinc-100 text-zinc-900 h-full p-[1rem] rounded-[.6rem] font-semibold'>
                             Aplicar
                         </button>
                     </div>
-                    <button disabled={isLoading} onClick={() => { createOrder() }} className='dark:bg-zinc-100 dark:text-zinc-900 p-[1rem] text-[1.6rem] mt-[1.2rem] font-semibold rounded-[.6rem] disabled:opacity-70 disabled:cursor-not-allowed'>Finalizar compra</button>
+                    <button aria-label='Finalizar compra' disabled={isLoading} onClick={() => { createOrder() }} className='dark:bg-zinc-100 dark:text-zinc-900 p-[1rem] text-[1.6rem] mt-[1.2rem] font-semibold rounded-[.6rem] disabled:opacity-70 disabled:cursor-not-allowed'>Finalizar compra</button>
                 </div>
             </div>
                 {isLoading && <div className='left-0 top-0 fixed z-[3] w-screen h-screen bg-zinc-900/30 flex items-center justify-center'>
