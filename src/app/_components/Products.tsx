@@ -122,7 +122,7 @@ const Products = ({ products, }: { products: Product[], }) => {
                                             "text-rose-500 fill-rose-500": favorites.some((f) => f.id === p.id),
                                         })} />
                                     </button>
-                                    <Image fetchPriority='high' onMouseOver={() => setIsHover(p.id)} onMouseLeave={() => setIsHover(null)} src={p.images[0]} alt={p.name} width={300} height={300} className={clsx('h-[260px] w-full object-cover ease-in-out block duration-500 rounded-[2rem]', {
+                                    <Image fetchPriority='high' priority loading='eager' onMouseOver={() => setIsHover(p.id)} onMouseLeave={() => setIsHover(null)} src={p.images[0]} alt={p.name} width={300} height={300} className={clsx('h-[260px] w-full object-cover ease-in-out block duration-500 rounded-[2rem]', {
                                         "scale-[1.15]": isHover === p.id,
                                         "scale-100": !isHover,
                                     })} />

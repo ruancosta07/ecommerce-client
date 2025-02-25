@@ -34,6 +34,7 @@ const Slider = () => {
                             width={1000}
                             height={1000}
                             fetchPriority='high'
+                            loading='eager'
                             className='rounded-[4rem] w-full h-full object-cover'
                         />
 
