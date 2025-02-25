@@ -53,11 +53,11 @@ const ExpiresOffert = () => {
     return (
         <>
             {!pathname.startsWith("/produto") && <div className='flex lg:items-center  mb-[2rem]'>
-                <div className='flex items-center gap-[.6rem] '>
+                <div className='flex items-center gap-[.6rem] text-zinc-900 dark:text-zinc-100'>
                     <Flame className='size-[2rem] lg:size-[3rem]' />
-                    <h1 className="text-[1.8rem] 2xl:text-[4rem] font-semibold col-span-full leading-none">Ofertas do dia </h1>
+                    <h1 className="text-[1.8rem] 2xl:text-[4rem] font-semibold col-span-full leading-none ">Ofertas do dia </h1>
                 </div>
-                {expiresDate && <div className='text-[1.2rem] lg:text-[1.8rem] font-semibold  flex items-center gap-[.8rem] ml-auto'>
+                {expiresDate && <div className='text-[1.2rem] lg:text-[1.8rem] font-semibold  flex items-center gap-[.8rem] ml-auto text-zinc-100'>
                     <span className='leading-none p-[.5rem] tabular-nums bg-rose-500'>
                         {expiresDate.hours < 10 ? `0${expiresDate.hours}` : expiresDate.hours}
                     </span>
