@@ -222,11 +222,11 @@ const Header = () => {
           </>}
           {signed && <>
             <Link href={"/usuario/carrinho"} className='relative'>
-              <ShoppingCart />
+              <ShoppingCart  className='text-zinc-900 dark:text-zinc-100'/>
               <span className='absolute tabular-nums bg-zinc-100 text-zinc-900 block p-[.2rem] right-[-30%] bottom-[70%] rounded-full font-medium text-[1.5rem]'>{cart.reduce((acc, c) => acc + c.quantity, 0)}</span>
             </Link>
             <Link href={"/usuario/favoritos"} className='relative'>
-              <Heart />
+              <Heart className='text-zinc-900 dark:text-zinc-100'/>
               <span className='absolute bg-zinc-100 tabular-nums text-zinc-900 block p-[.2rem] right-[-30%] bottom-[70%] rounded-full font-medium text-[1.5rem]'>{favorites.length}</span>
             </Link>
             <button onClick={() => setUserPopup(v => !v)} className='text-zinc-100 block relative text-start size-[30px]'>
