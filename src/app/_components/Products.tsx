@@ -103,9 +103,9 @@ const Products = ({ products, }: { products: Product[], }) => {
                         <SwiperSlide key={p.id}>
                             <Link aria-label='Acessar página do produto' href={`/produto/${p.id}`} className='' >
                                 <div className='overflow-hidden relative rounded-[2rem]'>
-                                    <button aria-label={favorites.find((f)=> f.id === p.id) ? "Remover produto dos favoritos" : "Adicionar produto aos favoritos"} onClick={(e) => addItemToFavorites(e, p.id)} data-disable-nprogress={true} className='absolute right-2 top-2 z-[2] bg-zinc-300  p-[1rem] rounded-full'>
-                                        <Heart className={clsx("size-[2.6rem]", {
-                                            "text-rose-500 fill-rose-500": favorites.some((f) => f.id === p.id),
+                                    <button aria-label={favorites.find((f)=> f.id === p.id) ? "Remover produto dos favoritos" : "Adicionar produto aos favoritos"} onClick={(e) => addItemToFavorites(e, p.id)} data-disable-nprogress={true} className='absolute right-2 top-2 z-[2] bg-zinc-300 dark:bg-zinc-800  p-[1rem] rounded-full'>
+                                        <Heart className={clsx("size-[2.6rem] text-rose-500", {
+                                            " fill-rose-500": favorites.some((f) => f.id === p.id),
                                         })} />
                                     </button>
                                     <Image fetchPriority='high' priority loading='eager' onMouseOver={() => setIsHover(p.id)} onMouseLeave={() => setIsHover(null)} src={p.images[0]} alt={p.name} width={300} height={300} className={clsx('h-[260px] w-full object-cover ease-in-out block duration-500 rounded-[2rem]', {
