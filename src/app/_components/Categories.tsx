@@ -43,8 +43,8 @@ const Categories = () => {
                 {categories.map((a, i) => {
                     return (
                         <Fragment key={i}>
-                             <Link href={`/categorias?categoria=${a.name.toLowerCase().slice(0, -1)}&pagina=1&limite=6`} className='text-center w-fit text-[1.4rem] font-space flex flex-col gap-[1rem]' >
-                                <Image src={a.link} alt={a.name} width={100} height={100} className='rounded-full size-[8rem] object-cover' />
+                             <Link aria-label={`Acessar sessão de ${a.name}`} href={`/categorias?categoria=${a.name.toLowerCase().slice(0, -1)}&pagina=1&limite=6`} className='text-center w-fit text-[1.4rem] font-space flex flex-col gap-[1rem]' >
+                                <Image src={a.link} alt={`Sessão de ${a.name}`} width={100} height={100} className='rounded-full size-[8rem] object-cover' />
                                 {a.name.replace("Moletoms", "Moletons")}
                             </Link> 
                             {i === 6 && <Link href={"/categorias?categoria='todas'"} className='text-center w-fit text-[1.4rem] font-space flex flex-col gap-[1rem] items-center' >
