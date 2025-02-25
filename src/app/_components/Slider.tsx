@@ -31,8 +31,8 @@ const Slider = () => {
                             src={"/banner-1.webp"}
                             priority
                             alt='a'
-                            width={1000}
-                            height={1000}
+                            width={315}
+                            height={315}
                             fetchPriority='high'
                             loading='eager'
                             className='rounded-[4rem] w-full h-full object-cover'
@@ -53,8 +53,8 @@ const Slider = () => {
                         <Image
                             src={"/banner-2.webp"}
                             alt='a'
-                            width={1000}
-                            height={1000}
+                            width={315}
+                            height={315}
                             className='rounded-[4rem] w-full h-full object-cover'
                         />
 
@@ -74,8 +74,8 @@ const Slider = () => {
                         <Image
                             src={"/banner-3.webp"}
                             alt='a'
-                            width={1000}
-                            height={1000}
+                            width={315}
+                            height={315}
                             className='rounded-[4rem] w-full h-full object-cover'
                         />
 
@@ -94,8 +94,8 @@ const Slider = () => {
                         <Image
                             src={"/banner-4.webp"}
                             alt='a'
-                            width={1000}
-                            height={1000}
+                            width={315}
+                            height={315}
                             className='rounded-[4rem] w-full h-full object-cover'
                         />
 
