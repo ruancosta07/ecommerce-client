@@ -119,22 +119,22 @@ const Login = () => {
     return (
         <main className=''>
             <div className="container-width grid lg:grid-cols-2 items-center h-[100dvh] ">
-                <Link onClick={clearLastRoute} href={lastRoute || "/"} className='absolute left-2 top-2 flex items-center gap-[.6rem] p-[1rem] text-[1.4rem] font-semibold w-fit'>
+                <Link onClick={clearLastRoute} href={lastRoute || "/"} className='absolute left-2 top-2 flex items-center gap-[.6rem] p-[1rem] text-[1.4rem] font-semibold w-fit text-zinc-900 dark:text-zinc-100'>
                     <ChevronLeft className='size-[1.8rem]' />
                     Voltar</Link>
                 {!hasTwoStepsAuth && <div className=''>
                     <Image src={logo} alt='file' width={64} height={64} className='mb-[2rem]' />
-                    <h1 className='text-[2.4rem] font-semibold'>Bem vindo(a) de volta.</h1>
+                    <h1 className='text-[2.4rem] font-semibold text-zinc-900 dark:text-zinc-100'>Bem vindo(a) de volta.</h1>
                     <form onSubmit={handleSubmit(signIn)} className='w-full lg:w-[80%] mt-[1.2rem] flex flex-col gap-[1.2rem]'>
                         <div className="" >
-                            <input type="text" {...register("email")} placeholder='email@exemplo.com' className='w-full p-[.8rem] text-[1.3rem] dark:bg-zinc-800/70 rounded-[.5rem]' />
+                            <input type="text" {...register("email")} placeholder='email@exemplo.com' className='w-full p-[.8rem] text-[1.3rem] dark:bg-zinc-800/70 rounded-[.5rem] text-zinc-900 dark:text-zinc-100' />
                             {errors.email && <p className='text-start text-red-400 text-[1.3rem] mt-[.4rem]'>{errors.email.message}</p>}
                         </div>
 
                         <div className="relative">
-                            <input type={seePassword ? "text" : "password"} {...register("password")} className='w-full p-[.8rem] text-[1.3rem] dark:bg-zinc-800/70 rounded-[.5rem]' placeholder='* * * * * * * ' />
+                            <input type={seePassword ? "text" : "password"} {...register("password")} className='w-full p-[.8rem] text-[1.3rem] dark:bg-zinc-800/70 rounded-[.5rem] text-zinc-900 dark:text-zinc-100' placeholder='* * * * * * * ' />
                             {errors.password && <p className='text-start text-red-400 text-[1.3rem] mt-[.4rem]'>{errors.password.message}</p>}
-                            <button type='button' onClick={() => setSeePassword(v => !v)} className='absolute right-4 top-2/4 -translate-y-2/4'>
+                            <button type='button' onClick={() => setSeePassword(v => !v)} className='absolute right-4 top-2/4 -translate-y-2/4 text-zinc-900 dark:text-zinc-100'>
                                 {seePassword ? <EyeOff className='size-[2rem]' /> : <Eye className='size-[2rem]' />}
                             </button>
                         </div>
@@ -145,9 +145,9 @@ const Login = () => {
                 </div>}
                 {hasTwoStepsAuth && <div className=''>
                     <Image src={logo} alt='file' width={64} height={64} className='mb-[2rem]' />
-                    <h1 className='text-[2.4rem] font-semibold mb-[.4rem]'>Insira o código enviado.</h1>
-                    <p className='text-[1.4rem] dark:text-zinc-300'>Um código de 6 digitos foi enviado para o seu email, insira ele logo abaixo.</p>
-                    <form onSubmit={handleSubmit(signIn)} className='w-full lg:w-[50%] mt-[1.2rem] flex flex-col gap-[1.2rem]'>
+                    <h1 className='text-[2.4rem] font-semibold mb-[.4rem] text-zinc-900 dark:text-zinc-100'>Insira o código enviado.</h1>
+                    <p className='text-[1.4rem] text-zinc-700 dark:text-zinc-300'>Um código de 6 digitos foi enviado para o seu email, insira ele logo abaixo.</p>
+                    <form onSubmit={handleSubmit(signIn)} className='w-full lg:w-[50%] mt-[1.2rem] flex flex-col gap-[1.2rem] text-zinc-900 dark:text-zinc-100'>
                         <div className="flex gap-[1rem]">
                             {Array.from({ length: otpLength }).map((a, i) => <input value={otpValues[i]} maxLength={1} key={i} {...register(`otp.${i}`)}
                                 onPaste={(e) => {
