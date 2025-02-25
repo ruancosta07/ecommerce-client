@@ -77,13 +77,13 @@ const ForYou = ({ products }: { products: Product[] }) => {
 
     return (
         <>
-            <section className=' bg-zinc-800/70 py-[4rem]'>
+            <section className=' bg-zinc-300/70 dark:bg-zinc-800/70 py-[4rem]'>
                 <div className='container-width'>
-                <div className="flex items-center gap-[1rem] mb-[1.2rem]">
+                <div className="flex items-center gap-[1rem] mb-[1.2rem] dark:text-zinc-100 text-zinc-900">
                     <StarsIcon className='size-[2rem] lg:size-[2rem]'/>
                     <h1 className='text-[2rem] lg:text-[4rem] font-semibold'>Para você</h1>
                 </div>
-                <div className='grid  xl:grid-cols-4 gap-[2rem]'>
+                <div className='grid xl:grid-cols-4 gap-[2rem]'>
                     {products.filter((p)=> !p.tags?.includes("oferta-do-dia")).map((p, i) => {
                         const reviews = p.reviews as Reviews[]
                         const totalRate = +(reviews.reduce((acc, review) => acc + Math.floor(review.rating) / reviews.length, 0)).toFixed(1)
@@ -91,8 +91,8 @@ const ForYou = ({ products }: { products: Product[] }) => {
                             <Link aria-label='Acessar página do produto' href={`/produto/${p.id}`} key={p.id} className='' >
                                 <div className='overflow-hidden relative rounded-[2rem]'>
                                     <button aria-label={favorites.find((f)=> f.id === p.id) ? "Remover produto dos favoritos" : "Adicionar produto aos favoritos"} onClick={(e) => addItemToFavorites(e, p.id)} className='absolute right-2 top-2 z-[2] bg-zinc-300 dark:bg-zinc-800 p-[1rem] rounded-full'>
-                                        <Heart className={clsx("size-[2.6rem]", {
-                                            "text-rose-500 fill-rose-500": favorites.some((f) => f.id === p.id),
+                                        <Heart className={clsx("size-[2.6rem] text-rose-500", {
+                                            " fill-rose-500": favorites.some((f) => f.id === p.id),
                                         })} />
                                     </button>
                                     <Image priority={i === 0} onMouseOver={() => setIsHover(p.id)} onMouseLeave={() => setIsHover(null)} src={p.images[0]} alt={p.name} width={300} height={300} className={clsx('h-[260px] w-full object-cover ease-in-out block duration-500 rounded-[2rem]', {
@@ -100,12 +100,12 @@ const ForYou = ({ products }: { products: Product[] }) => {
                                         "scale-100": !isHover,
                                     })} />
                                 </div>
-                                <h1 className='text-[2rem] mt-[1.2rem] font-semibold'>{p.name}</h1>
+                                <h1 className='text-[2rem] mt-[1.2rem] font-semibold text-zinc-900 dark:text-zinc-100'>{p.name}</h1>
                                 <div className='flex items-center gap-[.3rem] mt-[.2rem] mb-[.6rem]'>
-                                    <Star className='fill-zinc-100 size-[2rem]' />
-                                    <span className='text-[1.6rem]'>{totalRate > 0 && reviews.length > 0 ? totalRate : "Nenhuma avaliação"}</span>
+                                    <Star className='fill-zinc-900 text-zinc-900 dark:fill-zinc-100 dark:text-zinc-100 size-[2rem]' />
+                                    <span className='text-[1.6rem] text-zinc-900 dark:text-zinc-100'>{totalRate > 0 && reviews.length > 0 ? totalRate : "Nenhuma avaliação"}</span>
                                 </div>
-                                <span className='text-[1.6rem] font-semibold  block'>
+                                <span className='text-[1.6rem] font-semibold  block text-zinc-900 dark:text-zinc-100'>
                                     R$ {p.price.toFixed(2)}
                                 </span>
                                 <button aria-label={cart.find((f)=> f.id === p.id) ? "Remover produto do carrinho" : "Adicionar produto ao carrinho"} onClick={(e) => addItemToCart(e, p.id)} className='mt-[1.2rem] text-center w-full bg-zinc-900 text-zinc-100 dark:bg-zinc-100 dark:text-zinc-900 text-[1.5rem] p-[1rem] font-medium rounded-[1rem] flex items-center gap-[1rem] justify-center'>

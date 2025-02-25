@@ -38,8 +38,8 @@ const Categories = () => {
     ]
 
     return (
-        <section className='bg-zinc-600/70 mt-[8vh]'>
-            <div className="container-width grid grid-cols-3 place-items-center lg:grid-cols-8 gap-[2rem] xl:justify-between py-[2rem] text-zinc-100 font-medium">
+        <section className='bg-zinc-500/50 dark:bg-zinc-600/70 mt-[8vh]'>
+            <div className="container-width grid grid-cols-3 place-items-center lg:grid-cols-8 gap-[2rem] xl:justify-between py-[2rem] text-zinc-900 dark:text-zinc-100 font-medium">
                 {categories.map((a, i) => {
                     return (
                         <Fragment key={i}>

@@ -61,11 +61,11 @@ const ExpiresOffert = () => {
                     <span className='leading-none p-[.5rem] tabular-nums bg-rose-500'>
                         {expiresDate.hours < 10 ? `0${expiresDate.hours}` : expiresDate.hours}
                     </span>
-                    :
+                    <span className='text-zinc-900 dark:text-zinc-100'>:</span>
                     <span className='leading-none p-[.5rem] tabular-nums bg-rose-500'>
                         {expiresDate.minutes < 10 ? `0${expiresDate.minutes}` : expiresDate.minutes}
                     </span>
-                    :
+                    <span className='text-zinc-900 dark:text-zinc-100'>:</span>
                     <span className='leading-none p-[.5rem] tabular-nums bg-rose-500'>
                         {expiresDate.seconds < 10 ? `0${expiresDate?.seconds}` : expiresDate.seconds}
                     </span>
