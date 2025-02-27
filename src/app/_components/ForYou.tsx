@@ -83,7 +83,7 @@ const ForYou = ({ products }: { products: Product[] }) => {
                     <StarsIcon className='size-[2rem] lg:size-[2rem]'/>
                     <h1 className='text-[2rem] lg:text-[4rem] font-semibold'>Para você</h1>
                 </div>
-                <div className='grid xl:grid-cols-4 gap-[2rem]'>
+                <div className='grid lg:grid-cols-3 2xl:grid-cols-4 gap-[2rem]'>
                     {products.filter((p)=> !p.tags?.includes("oferta-do-dia")).map((p, i) => {
                         const reviews = p.reviews as Reviews[]
                         const totalRate = +(reviews.reduce((acc, review) => acc + Math.floor(review.rating) / reviews.length, 0)).toFixed(1)
