@@ -31,7 +31,7 @@ p{
 }
 
 .container-width{
-  @apply max-w-[80%] lg:max-w-[70%] mx-auto;
+  @apply max-w-[80%] lg:max-w-[80%] 2xl:max-w-[70%] mx-auto;
 }
 
 input{
