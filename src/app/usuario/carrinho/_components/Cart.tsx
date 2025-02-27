@@ -1,6 +1,6 @@
 "use client"
 import { useUser } from '@/store/User'
-import { CircleOffIcon, Frown, Loader2, MinusCircle, PlusCircle, ShoppingCart, Trash2 } from 'lucide-react'
+import { Frown, Loader2, MinusCircle, PlusCircle, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import React, { useEffect, useMemo, useState } from 'react'
 import Cookies from 'js-cookie'
@@ -10,7 +10,6 @@ import DayJs from '@/utils/Dayjs'
 import { useRouter } from 'next/navigation'
 import clsx from 'clsx'
 import Link from 'next/link'
-import { useForm } from 'react-hook-form'
 import { useGlobal } from '@/store/Global'
 const Cart = () => {
     const { cart, setCart } = useUser()
@@ -199,16 +198,16 @@ const Cart = () => {
     }
 
     return (
-        <main>
+        <main className='max-md:min-h-[90dvh]'>
             {cart.length > 0 && <><div className="container-width grid lg:grid-cols-[.7fr_.3fr] gap-x-[4rem]">
-                <h1 className='text-[3rem] font-semibold mb-[1.2rem] col-span-full'>Meu carrinho</h1>
-                <div className='grid gap-[2rem] max-md:pb-[4rem]'>
+                <h1 className='text-[3rem] font-semibold mb-[1.2rem] col-span-full text-zinc-900 dark:text-zinc-100'>Meu carrinho</h1>
+                <div className='grid gap-[2rem] max-md:pb-[12rem]'>
                     {cart.map((c) => <div key={c.id} className='flex gap-[1rem]'>
                         <Image src={c.images[0]} alt={c.name} width={180} height={180} className='object-cover max-md:size-[10rem] lg:size-[20rem] rounded-[2rem]' />
                         <div>
-                            <h1 className='text-[1.6rem] lg:text-[2.4rem] font-semibold break-all text-wrap break-words'>{c.name}</h1>
-                            <span className='text-[1.8rem] font-medium dark:text-zinc-300'>R$ {c.price.toFixed(2)}</span>
-                            <div className=' flex items-center gap-[.8rem]'>
+                            <h1 className='text-[1.6rem] lg:text-[2.4rem] font-semibold break-all text-wrap break-words text-zinc-900 dark:text-zinc-100'>{c.name}</h1>
+                            <span className='text-[1.8rem] font-medium text-zinc-700 dark:text-zinc-300'>R$ {c.price.toFixed(2)}</span>
+                            <div className=' flex items-center gap-[.8rem] text-zinc-900 dark:text-zinc-100'>
                                 <button aria-label='Diminuir a quantidade do item' disabled={isLoading} className='disabled:opacity-70 disabled:cursor-not-allowed' onClick={() => decreaseItem(c.id)}>
                                     <MinusCircle className='size-[2rem]' />
                                 </button>
@@ -223,8 +222,8 @@ const Cart = () => {
                         </button>
                     </div>)}
                 </div>
-                <div className={clsx('max-md:fixed max-md:w-full max-md:left-0 max-md:dark:bg-zinc-900 max-md:bottom-0 max-md:p-[3rem] ', {
-                    "hidden": scroll >= innerWidth / 10 && isMobile
+                <div className={clsx('max-md:fixed max-md:w-full max-md:left-0 max-md:dark:bg-zinc-900 max-md:bottom-0 max-md:p-[3rem] text-zinc-900 dark:text-zinc-100 ', {
+                    "hidden": scroll >= innerWidth / 15 && isMobile
                 })}>
                     <h1 className='text-[2rem] lg:text-[3rem] font-semibold leading-none'>Resumo do pedido</h1>
                     <div className='flex items-center justify-between text-[1.6rem]  mt-[.8rem]'>
@@ -240,11 +239,12 @@ const Cart = () => {
                         <p>R$ {totalValue.toFixed(2)}</p>
                     </div>
                     <hr className='dark:border-zinc-700 my-[1rem]'/>
-                    <div className='flex items-center gap-[1rem]'>
-                        <input placeholder='Insira um cupom' value={coupon} onChange={({target: {value}})=> setCoupon(value)} type="text" className='w-[70%] dark:bg-zinc-800/70 focus:bg-zinc-800 border border-transparent focus:dark:border-zinc-700 p-[1rem] text-[1.4rem] rounded-[.6rem] leading-none duration-200' />
-                        <button aria-label='Aplicar cupom' onClick={()=> verifyCoupon(coupon)} className='w-[30%] text-[1.4rem] bg-zinc-100 text-zinc-900 h-full p-[1rem] rounded-[.6rem] font-semibold'>
+                    <div className='flex items-center gap-[1rem] flex-wrap'>
+                        <input placeholder='Insira um cupom' value={coupon} onChange={({target: {value}})=> {setCoupon(value); setCouponIsInvalid(false)}} type="text" className='w-[70%] dark:bg-zinc-800/70 focus:bg-zinc-800 border border-transparent focus:dark:border-zinc-700 p-[1rem] text-[1.4rem] rounded-[.6rem] leading-none duration-200' />
+                        <button aria-label='Aplicar cupom' onClick={()=> verifyCoupon(coupon)} className=' flex-1 text-[1.4rem] bg-zinc-100 text-zinc-900 h-full p-[1.2rem] rounded-[.6rem] font-semibold'>
                             Aplicar
                         </button>
+                        {couponIsInvalid && <p className='w-full text-red-500 text-[1.4rem] font-medium tracking-wide'>Cupom expirado ou inválido</p>}
                     </div>
                     <button aria-label='Finalizar compra' disabled={isLoading} onClick={() => { createOrder() }} className='dark:bg-zinc-100 dark:text-zinc-900 p-[1rem] text-[1.6rem] mt-[1.2rem] font-semibold rounded-[.6rem] disabled:opacity-70 disabled:cursor-not-allowed'>Finalizar compra</button>
                 </div>
