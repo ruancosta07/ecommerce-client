@@ -136,7 +136,7 @@ const SingleProduct = ({ id, name, description, images, price, reviews, tags, se
                 <div>
                     <Image src={images[activeImage]} alt={name} width={400} height={400} className=' h-[40rem] lg:h-[50rem] 2xl:h-[60rem] w-full object-cover rounded-[3rem]' />
                 </div>
-                {<div className={clsx('max-lg:fixed max-lg:left-0 max-lg:bottom-0 max-lg:z-[3] max-lg:bg-zinc-900 max-lg:dark:bg-zinc-900 max-lg:p-[3rem]', {
+                {<div className={clsx('max-lg:fixed max-lg:left-0 max-lg:bottom-0 max-lg:z-[3] max-lg:bg-zinc-900 max-lg:dark:bg-zinc-900 max-lg:p-[3rem] max-lg:w-full', {
                     "max-lg:hidden" : isMounted && scroll >= innerHeight / 8
                 })}>
                     <h1 className='text-[3rem] text-zinc-900 dark:text-zinc-100 font-semibold'>{name}</h1>
