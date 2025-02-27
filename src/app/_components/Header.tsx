@@ -86,6 +86,25 @@ const Header = () => {
     }
   }, [theme])
 
+  useEffect(()=> {
+    function searchBarCtrlK(e:KeyboardEvent){
+      if(e.ctrlKey && e.key === "k"){
+        e.preventDefault()
+        setSearchBarFocus(v=> !v)
+        if(!searchBarFocus){
+          inputRef.current?.focus()
+          setShowProducts(true)
+        }
+        else{
+          inputRef.current?.blur()
+          setShowProducts(false)
+        }
+      }
+    }
+    window.addEventListener("keydown", searchBarCtrlK)
+    return ()=> window.removeEventListener("keydown", searchBarCtrlK)
+  },[searchBarFocus])
+
   return (
     <header>
       <div className='bg-zinc-300 dark:bg-zinc-800 flex justify-center dark:text-zinc-100 font-semibold py-[1rem] text-[1.2rem] lg:text-[1.6rem]'>
@@ -104,9 +123,13 @@ const Header = () => {
             setShowProducts(true)
           }
         }}>
-          <input aria-label='Pesquisar produto' type="text" onKeyUp={() => {
+          <input aria-label='Pesquisar produto' type="text" onKeyDown={(e) => {
             clearTimeout(timeOut.current as NodeJS.Timeout)
             timeOut.current = setTimeout(() => {
+              if(e.key === "Escape"){
+                setSearchBarFocus(false)
+                setShowProducts(false)
+              }
               if (watch("searchTerm").length > 0) {
                 searchProduct(watch("searchTerm"))
               } else {
@@ -127,14 +150,19 @@ const Header = () => {
               setSearchBarFocus(false)
               setShowProducts(false)
             }, 500)
-          }} className={clsx('dark:bg-zinc-800/70 hover:dark:border-zinc-700 border-transparent border duration-200 p-[1rem] text-[1.5rem] font-medium font-space leading-none rounded-[.6rem] w-full placeholder:text-zinc-600  dark:placeholder:text-zinc-400 pl-[4rem]', {
+          }} className={clsx('bg-zinc-300/70 hover:border-zinc-400 focus:border-zinc-400 dark:bg-zinc-800/70 hover:dark:border-zinc-700 border-transparent border duration-200 p-[1rem] text-[1.5rem] font-medium font-space leading-none rounded-[.6rem] w-full placeholder:text-zinc-600  dark:placeholder:text-zinc-400 pl-[4rem]', {
 
           })} placeholder='Pesquisar produto...' />
           <div className='absolute left-4 top-2/4 -translate-y-2/4'>
             <Search className='size-[1.8rem] text-zinc-900 dark:text-zinc-600' />
           </div>
+          {!isMobile && <div className='max-lg:hidden absolute right-4 top-2/4 -translate-y-2/4 text-[1.6rem] font-medium dark:text-zinc-300'>
+          {searchBarFocus ? <span>Esc</span> : <span>Ctrl K</span>}
+            
+            
+          </div>}
           {showProducts && (foundProducts.length > 0 || historyProducts.length > 0) &&
-            <div className='absolute left-0 top-[120%] dark:bg-zinc-900 w-full overflow-y-auto h-min max-h-[50rem] z-[5] rounded-[.6rem] p-[1.8rem]'>
+            <div className='absolute left-0 top-[120%] bg-zinc-300 dark:bg-zinc-900 w-full overflow-y-auto h-min max-h-[50rem] z-[5] rounded-[.6rem] p-[1.8rem]'>
               <div className="flex flex-col  gap-[1rem]">
                 {(historyProducts.length === 0 || watch("searchTerm").length > 0) && foundProducts.map(p => <Link onClick={() => {
                   if (!historyProducts.find((f) => f.id === p.id)) {
@@ -157,7 +185,7 @@ const Header = () => {
                 </Link>)}
 
                 {historyProducts.length > 0 && foundProducts.length === 0 && searchBarFocus && <>
-                  <div className='flex items-center gap-[.6rem] dark:text-zinc-300 text-[1.6rem]'>
+                  <div className='flex items-center gap-[.6rem] text-zinc-800 dark:text-zinc-300 text-[1.6rem] font-medium'>
                     <HistoryIcon className='size-[1.8rem]' />
                     <span>Buscas recentes</span>
                   </div>
@@ -166,8 +194,8 @@ const Header = () => {
                     }} href={`/produto/${p.id}`} key={p.id} className='flex gap-[1rem]'>
                       <Image src={p.image} alt={p.name} width={200} height={200} className='size-[10rem] object-cover rounded-[1.4rem]' />
                       <div>
-                        <span className='text-[2rem] font-semibold mb-[.4rem] block leading-none'>{p.name}</span>
-                        <p className='text-[1.6rem] font-space'>R$ {p.price}</p>
+                        <span className='text-[2rem] text-zinc-900 dark:text-zinc-100 font-semibold mb-[.4rem] block leading-none'>{p.name}</span>
+                        <p className='text-[1.6rem] text-zinc-900 dark:text-zinc-100 font-space'>R$ {p.price}</p>
                       </div>
                     </Link>)}
                 </>}
@@ -184,15 +212,12 @@ const Header = () => {
                 Criar conta
               </Link>
             </div>
-            <div className='after:content-[""] after:block after:absolute after:h-full after:w-[.2rem] after:bg-zinc-400 after:dark:bg-zinc-700 after:rounded-full'>
+            {/* <div className='after:content-[""] after:block after:absolute after:h-full after:w-[.2rem] after:bg-zinc-400 after:dark:bg-zinc-700 after:rounded-full'>
               
-              </div>
-            <div className='flex gap-[1rem]'>
-              <button onClick={()=> setTheme(theme === "dark" ? "light" : "dark")}>
+              </div> */}
+            <div className='flex gap-[.5rem]'>
+              <button onClick={()=> setTheme(theme === "dark" ? "light" : "dark")} className='rounded-full bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800/70 p-[.8rem] hover:dark:bg-zinc-800 duration-200'>
                 {theme === "dark" ? <MoonStar className='size-[2rem] text-zinc-100'/> : <SunDim className='size-[2rem] text-zinc-900 '/>}
-              </button>
-              <button>
-              <svg className='size-[2rem] fill-zinc-900 dark:fill-zinc-100' viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg"><path d="M7.49933 0.25C3.49635 0.25 0.25 3.49593 0.25 7.50024C0.25 10.703 2.32715 13.4206 5.2081 14.3797C5.57084 14.446 5.70302 14.2222 5.70302 14.0299C5.70302 13.8576 5.69679 13.4019 5.69323 12.797C3.67661 13.235 3.25112 11.825 3.25112 11.825C2.92132 10.9874 2.44599 10.7644 2.44599 10.7644C1.78773 10.3149 2.49584 10.3238 2.49584 10.3238C3.22353 10.375 3.60629 11.0711 3.60629 11.0711C4.25298 12.1788 5.30335 11.8588 5.71638 11.6732C5.78225 11.205 5.96962 10.8854 6.17658 10.7043C4.56675 10.5209 2.87415 9.89918 2.87415 7.12104C2.87415 6.32925 3.15677 5.68257 3.62053 5.17563C3.54576 4.99226 3.29697 4.25521 3.69174 3.25691C3.69174 3.25691 4.30015 3.06196 5.68522 3.99973C6.26337 3.83906 6.8838 3.75895 7.50022 3.75583C8.1162 3.75895 8.73619 3.83906 9.31523 3.99973C10.6994 3.06196 11.3069 3.25691 11.3069 3.25691C11.7026 4.25521 11.4538 4.99226 11.3795 5.17563C11.8441 5.68257 12.1245 6.32925 12.1245 7.12104C12.1245 9.9063 10.4292 10.5192 8.81452 10.6985C9.07444 10.9224 9.30633 11.3648 9.30633 12.0413C9.30633 13.0102 9.29742 13.7922 9.29742 14.0299C9.29742 14.2239 9.42828 14.4496 9.79591 14.3788C12.6746 13.4179 14.75 10.7025 14.75 7.50024C14.75 3.49593 11.5036 0.25 7.49933 0.25Z" fillRule="evenodd" clipRule="evenodd"></path></svg>
               </button>
             </div>
 
