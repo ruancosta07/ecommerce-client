@@ -22,7 +22,7 @@ const SearchProducts = ({ products, total, totalPages, clearProducts }: { produc
     const params = useSearchParams()
     const router = useRouter()
     const pathname = usePathname()
-    const category = params.get("categoria")
+    const product = params.get("produto")
     const page = params.get("pagina")
     const limit = params.get("limite")
     const maxPrice = params.get("max")
@@ -156,7 +156,7 @@ const SearchProducts = ({ products, total, totalPages, clearProducts }: { produc
                             <Slider className='mt-[1.2rem]' onValueChange={(e) => {
                                 setSlider(e)
                             }} onValueCommit={(e) => {
-                                router.push(`/categorias?categoria=${category}&pagina=${page}&limite=${limit}&min=${e[0]}&max=${e[1]}`)
+                                router.push(`/produtos?produto=${product}&pagina=${page}&limite=${limit}&min=${e[0]}&max=${e[1]}`)
 
                             }} max={max} slider={slider} setSlider={setSlider} />
                             <div className='flex justify-between text-[1.6rem] font-normal mt-[.8rem]'>
@@ -217,7 +217,7 @@ const SearchProducts = ({ products, total, totalPages, clearProducts }: { produc
                                     <Link className={clsx("text-[1.8rem] p-[.8rem] px-[1rem] tabular-nums rounded-[.6rem] font-medium", {
                                         "dark:bg-zinc-100 dark:text-zinc-900": i + 1 === Number(page),
                                         "dark:bg-zinc-800/70 dark:text-zinc-300": i + 1 !== Number(page),
-                                    })} href={`/categorias?categoria=${category}&pagina=${i + 1}&limite=${limit}`} key={i + 1}>{i + 1}</Link>
+                                    })} href={`/produtos?produto=${product}&pagina=${i + 1}&limite=${limit}`} key={i + 1}>{i + 1}</Link>
                                 ))}
                             </div>
                         </>}
