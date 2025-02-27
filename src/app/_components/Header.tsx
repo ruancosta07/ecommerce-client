@@ -110,7 +110,7 @@ const Header = () => {
       <div className='bg-zinc-300 dark:bg-zinc-800 flex justify-center dark:text-zinc-100 font-semibold py-[1rem] text-[1.2rem] lg:text-[1.6rem]'>
         <span className='leading-none'>Ofertas de até 20% com o cupom URBNX20</span>
       </div>
-      <div className="container-width py-[3rem] flex items-center justify-between relative max-md:flex-wrap">
+      <div className="container-width py-[3rem] flex items-center justify-between relative max-lg:flex-wrap">
         <Link href={"/"} className='text-zinc-900 dark:text-zinc-100 flex items-center gap-[.6rem] text-[2rem] max-lg:leading-none font-space font-semibold tracking-tight'>
           <AudioWaveform className='size-[3rem]' />
           UrbnX
@@ -118,7 +118,7 @@ const Header = () => {
         <motion.form onSubmit={(e) => {
           e.preventDefault()
           redirect(`/produtos?produto=${watch("searchTerm")}`)
-        }} className='lg:ml-auto lg:mr-[2rem] relative lg:w-[30%] max-md:order-3 max-md:mt-[1.2rem] max-md:w-full' animate={{ width: !isMobile ? (searchBarFocus ? "50%" : "30%") : "100%" }} onAnimationComplete={(e: AnimationDefinition & { width: "30%" | "50%" | "100%" }) => {
+        }} className='lg:ml-auto lg:mr-[2rem] relative lg:w-[30%] max-lg:order-3 max-lg:mt-[1.2rem] max-lg:w-full' animate={{ width: !isMobile ? (searchBarFocus ? "50%" : "30%") : "100%" }} onAnimationComplete={(e: AnimationDefinition & { width: "30%" | "50%" | "100%" }) => {
           if (e.width === "50%") {
             setShowProducts(true)
           }
@@ -150,7 +150,7 @@ const Header = () => {
               setSearchBarFocus(false)
               setShowProducts(false)
             }, 500)
-          }} className={clsx('bg-zinc-300/70 hover:border-zinc-400 focus:border-zinc-400 dark:bg-zinc-800/70 hover:dark:border-zinc-700 border-transparent border duration-200 p-[1rem] text-[1.5rem] font-medium font-space leading-none rounded-[.6rem] w-full placeholder:text-zinc-600  dark:placeholder:text-zinc-400 pl-[4rem]', {
+          }} className={clsx('bg-zinc-300/70 hover:border-zinc-400 focus:border-zinc-400 dark:bg-zinc-800/70 hover:dark:border-zinc-700 border-transparent border duration-200 p-[1rem] text-[1.5rem] font-medium font-space leading-none rounded-[.6rem] w-full placeholder:text-zinc-600  dark:placeholder:text-zinc-400 pl-[4rem] text-zinc-800 dark:text-zinc-300', {
 
           })} placeholder='Pesquisar produto...' />
           <div className='absolute left-4 top-2/4 -translate-y-2/4'>
@@ -179,8 +179,8 @@ const Header = () => {
                 }} href={`/produto/${p.id}`} key={p.id} className='flex gap-[1rem]'>
                   <Image src={p.images[0]} alt={p.name} width={200} height={200} className='size-[6rem] lg:size-[10rem] object-cover rounded-[1.4rem]' />
                   <div>
-                    <span className='text-[1.6rem] lg:text-[2rem] font-semibold mb-[.4rem] block leading-none'>{p.name}</span>
-                    <p className='text-[1.4rem] lg:text-[1.6rem] font-space'>R$ {p.price}</p>
+                    <span className='text-[1.6rem] lg:text-[2rem] font-semibold mb-[.4rem] block leading-none text-zinc-900 dark:text-zinc-100'>{p.name}</span>
+                    <p className='text-[1.4rem] lg:text-[1.6rem] font-space text-zinc-900 dark:text-zinc-100'>R$ {p.price}</p>
                   </div>
                 </Link>)}
 
