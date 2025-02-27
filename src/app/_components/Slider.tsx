@@ -4,8 +4,10 @@ import React from 'react'
 import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
+import { useGlobal } from '@/store/Global'
 
 const Slider = () => {
+    const { isMobile } = useGlobal()
     return (
         <section className=''>
             <Swiper
@@ -30,9 +32,9 @@ const Slider = () => {
                         <Image
                             src={"/banner-1.webp"}
                             priority
-                            alt='a'
-                            width={315}
-                            height={315}
+                            alt='Banner de camisas'
+                            width={isMobile ? 315 : 1000}
+                            height={isMobile ? 315 : 1000}
                             fetchPriority='high'
                             loading='eager'
                             className='rounded-[4rem] w-full h-full object-cover'
@@ -52,9 +54,9 @@ const Slider = () => {
                         </div>
                         <Image
                             src={"/banner-2.webp"}
-                            alt='a'
-                            width={315}
-                            height={315}
+                            alt='Banner de roupas'
+                            width={isMobile ? 315 : 1000}
+                            height={isMobile ? 315 : 1000}
                             className='rounded-[4rem] w-full h-full object-cover'
                         />
 
@@ -73,9 +75,9 @@ const Slider = () => {
                         </div>
                         <Image
                             src={"/banner-3.webp"}
-                            alt='a'
-                            width={315}
-                            height={315}
+                            alt='Banner de um sapato'
+                            width={isMobile ? 315 : 1000}
+                            height={isMobile ? 315 : 1000}
                             className='rounded-[4rem] w-full h-full object-cover'
                         />
 
@@ -93,9 +95,9 @@ const Slider = () => {
                         </div>
                         <Image
                             src={"/banner-4.webp"}
-                            alt='a'
-                            width={315}
-                            height={315}
+                            alt='Banner de um conjunto de roupas'
+                            width={isMobile ? 315 : 1000}
+                            height={isMobile ? 315 : 1000}
                             className='rounded-[4rem] w-full h-full object-cover'
                         />
 
