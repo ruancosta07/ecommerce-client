@@ -19,6 +19,7 @@ import { useGlobal } from '@/store/Global'
 import { SwiperOptions } from 'swiper/types'
 const SingleProduct = ({ id, name, description, images, price, reviews, tags, section }: Product) => {
     const [activeImage, setActiveImage] = useState<number>(0)
+    const [isMounted, setIsMounted] = useState(false)
     const { setCart, signed, setLastRoute } = useUser()
     const { isMobile } = useGlobal()
     const [similarProducts, setSimilarProducts] = useState<Product[]>([])
@@ -27,6 +28,11 @@ const SingleProduct = ({ id, name, description, images, price, reviews, tags, se
         return +Math.fround((price - percent) / 10).toFixed(2)
     }, [price])
     const pathname = usePathname()
+    const [scroll, setScroll] = useState(0)
+
+    useEffect(()=> {
+        setIsMounted(true)
+    },[])
 
     async function addItemToCart(id: string) {
         if (!signed) {
@@ -100,10 +106,18 @@ const SingleProduct = ({ id, name, description, images, price, reviews, tags, se
         }
     }, [reviews])
 
+    useEffect(()=> {
+        function changeScroll(){
+            setScroll(scrollY)
+        }
+        window.addEventListener("scroll", changeScroll)
+        return ()=> window.removeEventListener("scroll", changeScroll)
+    },[])
+
     return (
         <>
             <section className='grid lg:grid-cols-[.15fr_.65fr_.35fr] gap-[1rem] lg:gap-[2rem]'>
-                <Swiper direction={isMobile ? "horizontal" : "vertical"} breakpoints={breakpoints} touchEventsTarget='container' simulateTouch mousewheel={{ forceToAxis: true }} modules={[Mousewheel]} className="h-[150px] sm:h-[300px] lg:h-[600px] w-full max-lg:order-2 ">
+                <Swiper direction={isMobile ? "horizontal" : "vertical"} breakpoints={breakpoints} touchEventsTarget='container' simulateTouch mousewheel={{ forceToAxis: true }} modules={[Mousewheel]} className="h-[150px] sm:h-[300px] lg:h-[500px] 2xl:h-[600px] w-full max-lg:order-2 ">
                     {images.map((link, index) => <SwiperSlide key={index} onClick={() => setActiveImage(index)}>
                         <Image
                             src={link}
@@ -120,45 +134,48 @@ const SingleProduct = ({ id, name, description, images, price, reviews, tags, se
                     </SwiperSlide>)}
                 </Swiper>
                 <div>
-                    <Image src={images[activeImage]} alt={name} width={400} height={400} className=' h-[30rem] lg:h-[60rem] w-full object-cover rounded-[3rem]' />
+                    <Image src={images[activeImage]} alt={name} width={400} height={400} className=' h-[40rem] lg:h-[50rem] 2xl:h-[60rem] w-full object-cover rounded-[3rem]' />
                 </div>
-                {!isMobile && <div>
-                    <h1 className='text-[3rem] font-semibold'>{name}</h1>
+                {<div className={clsx('max-lg:fixed max-lg:left-0 max-lg:bottom-0 max-lg:z-[3] max-lg:bg-zinc-900 max-lg:dark:bg-zinc-900 max-lg:p-[3rem]', {
+                    "max-lg:hidden" : isMounted && scroll >= innerHeight / 8
+                })}>
+                    <h1 className='text-[3rem] text-zinc-900 dark:text-zinc-100 font-semibold'>{name}</h1>
                     <div className="flex items-center gap-[.3rem] mt-[.4rem]">
                         {totalRate ?
                             <>
-                                {Array.from({ length: +totalRate }).map((s, i) => <Star key={i} className='size-[1.8rem] fill-zinc-100' />)}
-                                {Array.from({ length: 5 - +totalRate }).map((s, i) => <Star key={i} className='size-[1.8rem] ' />)}
+                                {Array.from({ length: +totalRate }).map((s, i) => <Star key={i} className='size-[1.8rem] dark:fill-zinc-100 dark:text-zinc-100 text-zinc-900' />)}
+                                {Array.from({ length: 5 - +totalRate }).map((s, i) => <Star key={i} className='size-[1.8rem] dark:fill-zinc-100 dark:text-zinc-100 text-zinc-900' />)}
                             </>
-                            : <Star className='size-[1.8rem] ' />
+                            : <Star className='size-[1.8rem] dark:fill-zinc-100 dark:text-zinc-100 text-zinc-900' />
                         }
 
-                        <span className='text-[1.8rem] font-medium'>{totalRate?.toFixed(1)}</span>
-                        <Dot />
-                        <span className='text-[1.6rem]'>{reviews?.length} avaliações</span>
+                        <span className='text-[1.8rem] font-medium text-zinc-900 dark:text-zinc-100'>{totalRate?.toFixed(1)}</span>
+                        <Dot className='text-zinc-900 dark:text-zinc-100'/>
+                        <span className='text-[1.6rem] text-zinc-900 dark:text-zinc-100'>{reviews?.length} avaliações</span>
                     </div>
-                    <span className='text-[2rem] font-medium mt-[1.2rem] mb-[.4rem] block'>R$ {price}</span>
-                    <p className='text-[1.4rem] leading-[1.3]'>À vista no pix com até 5% off Em até 10x de R$ {discount} sem juros no cartão ou em 1x de {(discount * 10).toFixed(2)} com 5% off</p>
+                    <span className='text-[2rem] font-medium mt-[1.2rem] mb-[.4rem] block text-zinc-900 dark:text-zinc-100'>R$ {price}</span>
+                    <p className='text-[1.4rem] leading-[1.3] text-zinc-900 dark:text-zinc-100'>À vista no pix com até 5% off Em até 10x de R$ {discount} sem juros no cartão ou em 1x de {(discount * 10).toFixed(2)} com 5% off</p>
                     <div className="flex items-center gap-[1rem]">
-                        <button onClick={() => addItemToCart(id)} className='dark:bg-zinc-100 dark:text-zinc-900 text-[1.6rem] font-medium p-[1.2rem] mt-[1.2rem] rounded-[.6rem] w-full flex items-center gap-[.6rem] justify-center'>
+                        <button onClick={() => addItemToCart(id)} className='bg-zinc-900 text-zinc-100 dark:bg-zinc-100 dark:text-zinc-900 text-[1.6rem] font-medium p-[1.2rem] mt-[1.2rem] rounded-[.6rem] w-full flex items-center gap-[.6rem] justify-center'>
                             Adicionar ao carrinho
                             <ShoppingCart className='size-[2rem]' />
                         </button>
-                        <button className='dark:bg-zinc-100 dark:text-zinc-900 text-[1.6rem] font-medium p-[1rem] mt-[1.2rem] rounded-[.6rem]'><Heart className='size-[2.3rem]' /></button>
+                        <button className='bg-zinc-900 text-zinc-100 dark:bg-zinc-100 dark:text-zinc-900 text-[1.6rem] font-medium p-[1rem] mt-[1.2rem] rounded-[.6rem]'><Heart className='size-[2.3rem]' /></button>
                     </div>
                 </div>}
+                
             </section>
             <section className='mt-[10vh]'>
-                <div className="flex items-center gap-[1rem]">
+                <div className="flex items-center gap-[1rem] text-zinc-900 dark:text-zinc-100">
                     <List className='' />
                     <h1 className='text-[2rem] lg:text-[3rem] font-semibold'>Descrição do produto</h1>
                 </div>
-                <div className='prose lg:max-w-[80%] max-md:prose-h1:text-[1.8rem] prose-h1:font-semibold prose-h1:leading-[1.15] text-[1.6rem] mt-[1.2rem] prose-invert max-w-none prose-h2:text-[1.4rem] prose-p:text-[1.8rem] prose-p:leading-[1.3]'>
+                <div className='prose text-zinc-900 dark:text-zinc-100 lg:max-w-[80%] max-md:prose-h1:text-[1.8rem] prose-h1:font-semibold prose-h1:leading-[1.15] text-[1.6rem] mt-[1.2rem] prose-invert max-w-none prose-h2:text-[1.4rem] prose-p:text-[1.8rem] prose-p:leading-[1.3]'>
                     <ReactMarkdown className={"react-mk"}>{description}</ReactMarkdown>
                 </div>
             </section>
             <section className='mt-[10vh]'>
-                <div className="flex items-center gap-[1rem] mb-[1.2rem]">
+                <div className="flex items-center gap-[1rem] mb-[1.2rem] text-zinc-900 dark:text-zinc-100">
                     <MessageSquareHeartIcon className='' />
                     <h1 className='text-[2rem] lg:text-[3rem] font-semibold'>Avaliações do produto</h1>
                 </div>
@@ -167,26 +184,26 @@ const SingleProduct = ({ id, name, description, images, price, reviews, tags, se
                         const rate = Math.floor(r.rating)
                         const stars = Array.from({ length: rate })
                         const remanecentStars = Array.from({ length: 5 - rate })
-                        return (<div key={r.id} className='border dark:border-zinc-800/70 p-[1rem] rounded-[.5rem]'>
+                        return (<div key={r.id} className='border border-zinc-300 dark:border-zinc-700/70 p-[1rem] rounded-[.5rem]'>
                             <div className='flex items-center gap-[1rem]'>
                                 <Image src={r.user?.avatar as string} alt={`Foto de perfil de ${r.user?.name}`} width={30} height={30} className='rounded-full' />
-                                <span className='text-[1.6rem]'>{r.user?.name}</span>
+                                <span className='text-[1.6rem] text-zinc-900 dark:text-zinc-100'>{r.user?.name}</span>
                             </div>
                             <div className="flex gap-[.3rem] mb-[.4rem]">
-                                {stars.map((r, i) => <Star className='fill-zinc-100 text-zinc-100 size-[2rem]' key={i} />)}
-                                {remanecentStars.map((r, i) => <Star className=' text-zinc-100 size-[2rem]' key={i} />)}
+                                {stars.map((r, i) => <Star className='text-zinc-900 dark:fill-zinc-100 fill-zinc-900 dark:text-zinc-100 size-[2rem]' key={i} />)}
+                                {remanecentStars.map((r, i) => <Star className=' fill-zinc-900 text-zinc-900 dark:text-zinc-100 size-[2rem]' key={i} />)}
                             </div>
-                            <p className='text-[1.2rem] mt-[.6rem]'>Avaliado em {DayJs(r.createdAt).utc().format("DD/MM/YYYY")}</p>
+                            <p className='text-[1.2rem] mt-[.6rem] text-zinc-700 dark:text-zinc-300'>Avaliado em {DayJs(r.createdAt).utc().format("DD/MM/YYYY")}</p>
                             <div className='mt-[1.2rem]'>
-                                <h1 className='text-[1.6rem] lg:text-[2rem] font-semibold mb-[.4rem]'>{r.title}</h1>
-                                <p className='text-[1.2rem] lg:text-[1.4rem] '>{r.comment}</p>
+                                <h1 className='text-[1.6rem] lg:text-[2rem] font-semibold mb-[.4rem] text-zinc-900 dark:text-zinc-100'>{r.title}</h1>
+                                <p className='text-[1.2rem] lg:text-[1.4rem] text-zinc-900 dark:text-zinc-100'>{r.comment}</p>
                             </div>
                         </div>)
                     })}
                 </div>
             </section>
             <section className='mt-[10vh]'>
-                <div className="flex items-center gap-[1rem] mb-[1.2rem]">
+                <div className="flex items-center gap-[1rem] mb-[1.2rem] text-zinc-900 dark:text-zinc-100">
                     <Tags className='' />
                     <h1 className='text-[2rem] lg:text-[3rem] font-semibold'>Produtos similares</h1>
                 </div>
