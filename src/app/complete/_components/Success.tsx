@@ -6,7 +6,7 @@ import React from 'react'
 
 interface Order {
   total: number;
-  products: Array<{ id: string; name: string; images: string; price: number }>
+  products: Array<{ id: string; name: string; images: string; price: number; quantity:number; }>
 }
 
 const Success = ({ order }: { order: Order }) => {
@@ -26,6 +26,7 @@ const Success = ({ order }: { order: Order }) => {
               <div>
                 <span className='text-[1.6rem] font-semibold'>{p.name}</span>
                 <p className='text-[1.4rem] font-medium'>R$ {p.price.toFixed(2)}</p>
+                <span className='text-[1.4rem] block mt-[.4rem]'>Quantidade: {p.quantity}</span>
               </div>
             </div>)}
           </div>
