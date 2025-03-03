@@ -44,6 +44,8 @@ export interface Orders {
     expireDate: Date
     createdAt: Date
     checkoutUrl: string
+    reviewed:boolean
+    quantity:number;
 }
 
 enum UserRole {
