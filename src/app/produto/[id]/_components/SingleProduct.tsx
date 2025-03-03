@@ -185,8 +185,8 @@ const SingleProduct = ({ id, name, description, images, price, reviews, tags, se
                         const stars = Array.from({ length: rate })
                         const remanecentStars = Array.from({ length: 5 - rate })
                         return (<div key={r.id} className='border border-zinc-300 dark:border-zinc-700/70 p-[1rem] rounded-[.5rem]'>
-                            <div className='flex items-center gap-[1rem]'>
-                                <Image src={r.user?.avatar as string} alt={`Foto de perfil de ${r.user?.name}`} width={30} height={30} className='rounded-full' />
+                            <div className='flex items-center gap-[1rem] mb-[.4rem]'>
+                                <Image src={r.user?.avatar as string} alt={`Foto de perfil de ${r.user?.name}`} width={30} height={30} className='rounded-full object-cover size-[3rem]' />
                                 <span className='text-[1.6rem] text-zinc-900 dark:text-zinc-100'>{r.user?.name}</span>
                             </div>
                             <div className="flex gap-[.3rem] mb-[.4rem]">
