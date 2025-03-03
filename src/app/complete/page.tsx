@@ -2,10 +2,9 @@ import React from 'react'
 import Success from './_components/Success'
 import DayJs from '@/utils/Dayjs';
 import { redirect } from 'next/navigation';
-import Progress from '../_components/Progress';
 interface Order {
   total:number;
-  products: Array<{id:string;name:string;images:string;price:number; }>;
+  products: Array<{id:string;name:string;images:string;price:number;quantity:number }>;
   created:number
   expiresAt:number;
 }
