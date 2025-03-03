@@ -1,9 +1,21 @@
 import React from 'react'
-import {motion, MotionProps} from "framer-motion"
+import { motion, MotionProps } from 'framer-motion'
 import { twMerge } from 'tw-merge'
-const Popup = ({key, className, motionOptions, children,}: {key?:string, className?:string, motionOptions?:MotionProps, children:React.ReactNode}) => {
+
+interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string
+  motionOptions?: MotionProps
+}
+
+const Popup: React.FC<PopupProps> = ({ className, motionOptions, children, ...props }) => {
   return (
-    <motion.div className={twMerge(className as string)} {...motionOptions} key={key} initial={motionOptions?.initial ? motionOptions.initial :{scale: .9, opacity:0}} animate={motionOptions?.animate ? motionOptions.animate:{opacity:1, scale:1}}>
+    <motion.div
+      {...props}
+      className={twMerge(className || "")}
+      {...motionOptions}
+      initial={motionOptions?.initial ?? { scale: 0.9, opacity: 0 }}
+      animate={motionOptions?.animate ?? { opacity: 1, scale: 1 }}
+    >
       {children}
     </motion.div>
   )
