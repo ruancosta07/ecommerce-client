@@ -52,7 +52,7 @@ const Orders = () => {
     if (user) {
       async function loadOrders() {
         try {
-          const response = await fetch(`${process.env.NEXT_PUBLIC_API_DEV_URL}/orders/orders/${user?.id}`, {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_PROD_URL}/orders/orders/${user?.id}`, {
             method: "GET",
             headers: {
               "Authorization": `Bearer ${Cookies.get("authTokenUser")}`
@@ -108,7 +108,7 @@ const Orders = () => {
 
   async function rateProduct() {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_DEV_URL}/reviews/create/${reviewId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_PROD_URL}/reviews/create/${reviewId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -134,7 +134,7 @@ const Orders = () => {
     if(showReview && reviewId){
       async function loadReview(){
         try {
-          const response = await fetch(`${process.env.NEXT_PUBLIC_API_DEV_URL}/reviews/review/${reviewId}`)
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_PROD_URL}/reviews/review/${reviewId}`)
           const data = await response.json()
           console.log(data)
           setActiveReview({...data})
