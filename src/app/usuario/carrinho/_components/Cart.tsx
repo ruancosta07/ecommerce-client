@@ -168,7 +168,7 @@ const Cart = () => {
 
     async function createOrder() {
         const random = Math.round((Math.random()) * 60 + 1)
-        const order: Orders[] = cart.map((o) => ({ estimatedDeliveryDate: DayJs().add(random).toDate(), expireDate: DayJs().add(7).toDate(), productId: o.id, price: o.price }))
+        const order: Orders[] = cart.map((o) => ({estimatedDeliveryDate: DayJs().add(random).toDate(), expireDate: DayJs().add(7).toDate(), productId: o.id, price: o.price, quantity:o.quantity }))
         setIsLoading(true)
         setMessage({
             type: "loading",
