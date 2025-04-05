@@ -27,6 +27,35 @@ const Favorites = () => {
         }
     }
 
+    async function removeItemFromFavorites(id:string){
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_PROD_URL}/users/favorites/remove/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Authorization": `Bearer ${Cookies.get("authTokenUser")}`
+                }
+            })
+            if (!response.ok) {
+                setMessage({
+                    title: "Erro ao remover item do carrinho",
+                    position: "bottom-right",
+                    type: "error",
+                    message: "Caso o erro persista, entre em contato com nosso suporte"
+                })
+            }
+            const data = await response.json()
+            setFavorites(data)
+            setMessage({
+                title: "Item removido com sucesso",
+                position: "bottom-right",
+                type: "success",
+                // message: "O item foi removido com sucesso, cheque seu carrinho para ver a alteração"
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     return (
         <main>
             <div className="container-width o grid lg:grid-cols-[.7fr_.3fr] gap-x-[4rem]">
@@ -39,7 +68,7 @@ const Favorites = () => {
                             <span className='text-[1.8rem] font-medium dark:text-zinc-300'>R$ {c.price.toFixed(2)}</span>
                                 <button onClick={()=> moveItemToFavorites(c.id)} className='dark:bg-zinc-100 dark:text-zinc-900 text-[1.4rem] font-medium p-[1rem] block mt-[.8rem] rounded-[.6rem]'>Mover para o carrinho</button>
                         </div>
-                        <button className='absolute top-0 right-0 text-red-400'>
+                        <button onClick={()=> removeItemFromFavorites(c.id)} className='absolute top-0 right-0 text-red-400'>
                             <Trash2 />
                         </button>
                     </div>)}
