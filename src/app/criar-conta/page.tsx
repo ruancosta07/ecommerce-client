@@ -6,7 +6,7 @@ import { useUser } from '@/store/User'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { ChevronLeft, Eye, EyeOff } from 'lucide-react'
+import { ChevronLeft, Eye, EyeOff, Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import {zodResolver} from "@hookform/resolvers/zod"
 import { z } from 'zod'
@@ -31,10 +31,10 @@ const CriarConta = () => {
     })
     const router = useRouter()
     const [seePassword, setSeePassword] = useState(false)
-    // console.log(w("email"))
+    const [isLoading, setIsLoading] = useState(false)
 
-    async function signIn(data: CreateAccount) {
-        console.log(data)
+    async function signIn() {
+        setIsLoading(true)
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_PROD_URL}/users/create`, {
                 method: "POST",
@@ -53,6 +53,7 @@ const CriarConta = () => {
                 return
             }
             const data = await response.json()
+            console.log(data)
             setUser(data.user)
             setSigned(true)
             setCart(data.user.cart || [])
@@ -62,6 +63,8 @@ const CriarConta = () => {
             router.push("/")
         } catch (err) {
             console.log(err)
+        } finally{
+            setIsLoading(false)
         }
     }
 
@@ -100,8 +103,8 @@ const CriarConta = () => {
                         </div>
                         {errors.password && <p className='text-start text-red-400 text-[1.3rem] mt-[.4rem]'>{errors.password.message}</p>}
                     </div>
-                    <button type='submit' className='bg-zinc-100 text-zinc-900 w-full mt-[.8rem] p-[1rem] font-semibold text-[1.5rem] rounded-[.5rem]'>
-                        Criar conta
+                    <button type='submit' disabled={isLoading} className='bg-zinc-100 text-zinc-900 w-full mt-[.8rem] p-[1rem] font-semibold text-[1.5rem] rounded-[.5rem] disabled:opacity-70 disabled:cursor-not-allowed'>
+                        {isLoading ? <Loader2 className='size-[1.4rem] animate-spin mx-auto'/>: "Criar conta"}
                     </button>
                 </form>
             </div>
