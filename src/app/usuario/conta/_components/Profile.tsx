@@ -147,7 +147,9 @@ const Profile = () => {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='max-lg:mb-[2rem] perfil'>
             <label onMouseEnter={() => setAvatarHover(true)} onMouseLeave={() => setAvatarHover(false)} className='mb-[2rem] relative block size-[160px] rounded-full'>
-                <Image src={user?.avatar as string} alt={`Foto de perfil de ${user?.name}`} width={160} height={160} className='rounded-full object-cover h-full w-full' />
+               {user.avatar ?  <Image src={user?.avatar as string} alt={`Foto de perfil de ${user?.name}`} width={160} height={160} className='rounded-full object-cover h-full w-full' />: <div className='border size-[16rem] rounded-full border-zinc-500 dark:border-zinc-700 flex items-center justify-center text-[2rem] lg:text-[4rem] font-semibold'>
+                <span>{user.name[0] + user.name.split(" ")[user.name.split(" ").length - 1][0] }</span>
+                </div>}
                 {avatarHover && <button className='bg-zinc-900/70 absolute text-[1.4rem] w-full h-full z-[1] left-0 top-0 rounded-full flex flex-col gap-[.8rem] items-center justify-center'> <ImagePlus className='size-[2rem]' />Mudar foto </button>}
                 <input onChange={changeAvatar} type="file" className='absolute w-full h-full left-0 top-0 z-[1] cursor-pointer opacity-0' />
             </label>
