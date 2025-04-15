@@ -68,4 +68,6 @@ export interface User {
     role: UserRole
     orders: Orders[]
     adress: Adress
+    provider?:string;
+    providerId?:string
 }
