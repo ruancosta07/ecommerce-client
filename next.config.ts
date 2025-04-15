@@ -17,8 +17,8 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [{
       protocol: "https",
-      hostname: "dpvbxbfpfnahmtbhcadf.supabase.co",
-      pathname: "/storage/v1/object/public/utilsBucket/**"
+      hostname: "**",
+      pathname: "**"
     },
     {protocol: "https",
       hostname: "files.stripe.com",
