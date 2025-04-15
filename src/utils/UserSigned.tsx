@@ -24,6 +24,7 @@ export default function UserSigned() {
                         setUser(null)
                         setCart([])
                         setFavorites([])
+                        router.push("/login")
                         return
                     }
                     const data = await response.json()
@@ -37,6 +38,7 @@ export default function UserSigned() {
                     setUser(null)
                     setCart([])
                     setFavorites([])
+                    router.push("/login")
                 }
             }
             else {
