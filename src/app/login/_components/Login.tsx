@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import logo from "../../icon.svg"
 import { useUser } from '@/store/User'
 import Cookies from 'js-cookie'
@@ -164,7 +164,8 @@ const Login = () => {
     }
 
     return (
-        <main className=''>
+       <Suspense>
+         <main className=''>
             <div className="container-width grid lg:grid-cols-2 items-center h-[100dvh] ">
                 <Link onClick={clearLastRoute} href={lastRoute || "/"} className='absolute left-2 top-2 flex items-center gap-[.6rem] p-[1rem] text-[1.4rem] font-semibold w-fit text-zinc-900 dark:text-zinc-100'>
                     <ChevronLeft className='size-[1.8rem]' />
@@ -239,6 +240,7 @@ const Login = () => {
                 {/* </div> */}
             </div>
         </main>
+       </Suspense>
     )
 }
 
